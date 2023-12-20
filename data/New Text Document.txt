@@ -1,0 +1,20 @@
+skewed = ['capital-gain', 'capital-loss']
+
+features_log_transformed = pd.DataFrame(features_raw)
+features_log_transformed[skewed] = features_raw[skewed].apply(lambda x: np.log(x + 1))
+
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(16, 4))
+
+features_log_transformed['capital-gain'].plot(kind='hist', ax=ax[0], color='blue', edgecolor='black', bins=25)
+ax[0].set_title('Histogram of Log Transformed Capital Gain')
+ax[0].set_xlabel('Log Transformed Capital Gain')
+ax[0].set_ylabel('Frequency')
+
+features_log_transformed['capital-loss'].plot(kind='hist', ax=ax[1], color='red', edgecolor='black', bins=25)
+ax[1].set_title('Histogram of Log Transformed Capital Loss')
+ax[1].set_xlabel('Log Transformed Capital Loss')
+ax[1].set_ylabel('Frequency')
+
+plt.tight_layout()
+plt.ylim(ymax=2000)
+plt.show()
